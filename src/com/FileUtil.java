@@ -15,7 +15,7 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 public class FileUtil {
 
-    public static boolean getLineCount(File file) throws IOException {
+    public static boolean checkIfFileHasMore10Line(File file) throws IOException {
         int lines = 0;
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             while (reader.readLine() != null & lines <= 10) {
@@ -34,7 +34,7 @@ public class FileUtil {
 
     public static void copyFile(List<File> filesInFolder, Path pathToCopy) throws IOException {
         for (File file : Objects.requireNonNull(filesInFolder)) {
-            if (FileUtil.getLineCount(file)) {
+            if (FileUtil.checkIfFileHasMore10Line(file)) {
                 Files.copy(file.toPath(), pathToCopy.resolve(file.getName()), REPLACE_EXISTING);
                 System.out.printf("файл : %s скопирован\n", file.getName());
             }
